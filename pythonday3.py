@@ -73,5 +73,5 @@ print(b)
  
  #### class work 2
 
-def poc(r:int):
+
     """  
