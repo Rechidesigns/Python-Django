@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ post.title }}
+{% endblock title %}
+
+
+{% block body %}
+
+
+{% if new_comment %}
+    <div class="popup">
+        <span class="popuptext" id="myPopup">Added Comment</span>
+    </div>
+
+{% endif %}
+
+
+<!-- Page Header Start -->
+<div class="container py-5 px-2 bg-primary">
+    <div class="row py-5 px-4">
+        <div class="col-sm-6 text-center text-md-left">
+            <h1 class="mb-3 mb-md-0 text-white text-uppercase font-weight-bold">{{ post.title }}</h1>
+        </div>
+        <div class="col-sm-6 text-center text-md-right">
+            <div class="d-inline-flex pt-2">
+                <h4 class="m-0 text-white"><a class="text-white" href="{% url 'blog:post_list' %}">Home</a></h4>
+                <h4 class="m-0 text-white px-2">/</h4>
+                <h4 class="m-0 text-white">Blog Detail</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Blog Detail Start -->
+<div class="container py-5 px-2 bg-white">
+    <div class="row px-4">
+        <div class="col-12">
+            <img class="img-fluid mb-4" src={{ post.image.url }} alt= {{ post.title | title }}>
+            <h2 class="mb-3 font-weight-bold"> {{ post.title | title }} </h2>
+            <div class="d-flex">
+                <p class="mr-3 text-muted"><i class="fa fa-calendar-alt"></i> {{post.publish }} </p>
+                <p class="mr-3 text-muted"><i class="fa fa-comments"></i> 15 Comments</p>
+            </div>
+            <p style="text-align:justify;">{{ post.body }}</p>
+        </div>
+
+        {% comment %} <div class="col-12 py-4">
+            <a href="" class="btn btn-sm btn-outline-primary mb-1">Lorem</a>
+            <a href="" class="btn btn-sm btn-outline-primary mb-1">Lorem</a>
+            <a href="" class="btn btn-sm btn-outline-primary mb-1">Lorem</a>
+            <a href="" class="btn btn-sm btn-outline-primary mb-1">Lorem</a>
+            <a href="" class="btn btn-sm btn-outline-primary mb-1">Lorem</a>
+            <a href="" class="btn btn-sm btn-outline-primary mb-1">Lorem</a>
+            <a href="" class="btn btn-sm btn-outline-primary mb-1">Lorem</a>
+        </div> {% endcomment %}
+
+        <div class="col-12 py-4">
+            <div class="btn-group btn-group-lg w-100">
+                {% if prev_post %}
+        
+                <a href="{{ prev_post.get_absolute_url }}" class="btn btn-sm btn-outline-primary mb-1">Previous</a>
+
+                {% endif %}
+                
+                {% if next_post %}
+
+                <a href="{{ next_post.get_absolute_url }}" class="btn btn-sm btn-outline-primary mb-1">Next</a>
+
+                {% endif %}
+            </div> 
+        </div>
+        <div class="col-12 py-4">
+            {% with all_comments.count as total_comments %}
+            <h3 class="mb-4 font-weight-bold">{{ total_comments }} Comment{{ total_comments|pluralize }}</h3>
+            {% endwith %}
+            
+            {% for comment in all_comments %}
+            <div class="media mb-4">
+                <div class="media-body">
+                    <h4>{{ comment.name}} <small><i> {{ comment.date_created }} </i></small></h4>
+                    <p>{{ comment.message}}
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+        <div class="col-12">
+            <h3 class="mb-4 font-weight-bold">Leave a comment</h3>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" class="form-control" id="name" required name="name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" class="form-control" id="email" required name="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" cols="30" rows="5" class="form-control" required name="message"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Leave Comment" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Blog Detail End -->
+
+
+
+{% endblock body %}

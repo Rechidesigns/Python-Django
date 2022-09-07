@@ -1,0 +1,7 @@
+
+{% for post in posts %}
+<div>
+    <h3>{{ post.title }}</h3>
+    <p> {{ post.body | truncatewords:10 }} <span><a href="{{ post.get_absolute_url }}">Read More</a> </span></p>
+</div>
+{% endfor %}
