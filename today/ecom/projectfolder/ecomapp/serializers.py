@@ -1,4 +1,3 @@
-# from itertools import product
 from rest_framework import serializers
 from .models import Category, Product
 
