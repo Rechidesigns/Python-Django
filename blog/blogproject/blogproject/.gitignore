@@ -1,0 +1,12 @@
+.env
+db.sqlite3
+blogproject
+Scripts
+Lib
+pyvenv.cfg
+_pycache_
+include
+__init__
+__pycache__
+__init__.py
+__pycache__

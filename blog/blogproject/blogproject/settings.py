@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blogapp.apps.BlogappConfig',
-    # 'cloudinary',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -122,12 +122,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-# STATIC_URL = 'static/'
-# CLOUDINARY_STORAGE = {
-#     'CLOUD_NAME': os.getenv("CLOUD_NAME"),
-#     'API_KEY': os.getenv("CLOUD_API_KEY"),
-#     'API_SECRET': os.getenv("CLOUD_SECRET_KEY"),
-
+STATIC_URL = 'static/'
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv("CLOUD_NAME"),
+    'API_KEY': os.getenv("CLOUD_API_KEY"),
+    'API_SECRET': os.getenv("CLOUD_SECRET_KEY"),
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
